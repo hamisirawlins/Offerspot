@@ -6,7 +6,6 @@ const App = () => {
        <Container maxwidth="lg">
            <AppBar position="static" color="inherit">
                <Typography variant="h2" align="center">Offerspot</Typography>
-               <img src={} alt="offers" height="60"/>
            </AppBar>
 
        </Container>
