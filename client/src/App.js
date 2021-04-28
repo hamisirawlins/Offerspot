@@ -1,22 +1,25 @@
-import React from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
-
-import offers from './img/Offers.png';
-
-import Form from './components/Form/Form'
-import Posts from './components/Posts/Posts'
-
+import React,{useEffect} from 'react';
+import { Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
+import {useDispatch} from 'react-redux';
 import useStyles from './styles';
 
-const App = ()=> {
-    const classes = useStyles();
-    return (
+import {getPosts} from './actions/posts';
+
+import Posts from './components/Posts/Posts';
+import Form from './components/Form/Form';
+
+const App= () => {
+    const classes= useStyles();
+    const dispatch= useDispatch();
+
+    useEffect(()=>{
+        dispatch(getPosts());
+    },[dispatch]);
+
+    return(
         <Container maxWidth="lg">
             <AppBar className={classes.appBar} position="static" color="inherit">
-                <img className={classes.image} src={offers} alt="offers" height="60"/>
-                <Typography className={classes.heading} variant="h2" align="center">
-                    The Ultimate Offers Spot            
-                </Typography>
+                <Typography className={classes.heading} variant="h2" align="center" >Offerspot</Typography>
             </AppBar>
             <Grow in>
                 <Container>
@@ -31,6 +34,6 @@ const App = ()=> {
                 </Container>
             </Grow>
         </Container>
-    )
+    );
 }
 export default App;
