@@ -9,7 +9,7 @@
 
    const Form = ({currentId, setCurrentId}) =>{
        const [postData,setPostData] = useState({
-           creator:'',title:'',descr:'',tags:'',selectedFile:''
+           creator:'',title:'',content:'',tags:'',selectedFile:''
        });
        const post=useSelector((state)=>currentId? state.posts.find((p)=>p._id===currentId):null);
        const classes= useStyles();
@@ -32,7 +32,7 @@
 
        const clear=()=>{
            setCurrentId(null);
-           setPostData({creator:'',title:'',descr:'',tags:'',selectedFile:''});
+           setPostData({creator:'',title:'',content:'',tags:'',selectedFile:''});
        }
 
        return(
@@ -41,8 +41,8 @@
                   <Typography variant="h6">{currentId ? 'Edit':'Create'} Your Offer</Typography>
                   <TextField name="creator" variant="outlined" label="Your Name" fullWidth value={postData.creator} onChange={(e)=> setPostData({...postData, creator:e.target.value})}/>
                   <TextField name="title" variant="outlined" label="Post Title" fullWidth value={postData.title} onChange={(e)=> setPostData({...postData, title:e.target.value})}/>
-                  <TextField name="descr" variant="outlined" label="Description" fullWidth value={postData.descr} onChange={(e)=> setPostData({...postData, descr:e.target.value})}/>
-                  <TextField name="tags" variant="outlined" label="Tags separated by comma" fullWidth value={postData.tags} onChange={(e)=> setPostData({...postData, tags:e.target.value})}/>
+                  <TextField name="descr" variant="outlined" label="Description" fullWidth value={postData.content} onChange={(e)=> setPostData({...postData, content:e.target.value})}/>
+                  <TextField name="tags" variant="outlined" label="Tags separated by comma" fullWidth value={postData.tags} onChange={(e)=> setPostData({...postData, tags:e.target.value.split(',')})}/>
                   <div className={classes.fileInput}>
                       <FileBase type="file" multiple={false} onDone={({base64})=> setPostData({...postData, selectedFile: base64})}/>
                   </div>
