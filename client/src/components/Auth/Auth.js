@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
 import {Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core';
+import {GoogleLogin} from 'react-google-login';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from './Input';
+import Icon from './icon';
 
 const Auth = () => {
     const classes=useStyles();
@@ -13,6 +15,14 @@ const Auth = () => {
     const switchMode=()=>{
         setIsSignup((prevIsSignup)=> !prevIsSignup);
         handleShowPassword(false);
+    };
+
+    const googleSuccess=(res)=>{
+        console.log(res);
+    };
+
+    const googleFailure=()=>{
+        console.log("Google Sign In Failed. Try Again Later");
     };
     const handleSubmit=()=>{};
     const handleChange=()=>{};
@@ -32,6 +42,15 @@ const Auth = () => {
                         <Input name="email" label="Email Address" handleChange={handleChange} type="email"/>
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
                         {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password"/>}
+                        <GoogleLogin
+                            clientId="144237828476-v6ju9r4bsdo5fagmqc8uvi417oahud08.apps.googleusercontent.com"
+                            render={(renderProps)=>(
+                                <Button className={classes.googleButton} color='primary' fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">Google Sign In</Button>
+                            )}
+                            onSuccess={googleSuccess}
+                            onFailure={googleFailure}
+                            cookiePolicy="single_host_origin"
+                        />
 
                         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                             {isSignup ? 'Sign Up' : 'Sign In'}
@@ -50,4 +69,4 @@ const Auth = () => {
     )
 }
 
-export default Auth
+export default Auth;
