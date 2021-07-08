@@ -9,20 +9,20 @@ const Input = ({name,handleChange,label,autoFocus,type, half,handleShowPassword}
         <Grid item xs={12} sm={half ? 6: 12}>
             <TextField 
             name={name}
-            inChange={handleChange}
+            onChange={handleChange}
             variant="outlined"
             required
             fullWidth
             label={label}
             autoFocus={autoFocus}
             type={type}
-            InputProps={name==='password' && {
+            InputProps={name==='password' ? {
                 endAdornment:(
                     <InputAdornment position="end">
                         <IconButton onClick={handleShowPassword}>{type==="password" ? <Visibility/>: <VisibilityOff/>}</IconButton>
                     </InputAdornment>
-                )
-            }}
+                ),
+            }:null}
             />
         </Grid>
     );
